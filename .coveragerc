@@ -3,15 +3,17 @@
 [run]
 branch = True
 
+# Omit things like external dependencies from coverage reports
+omit =
+    # Omit anything in a .local directory anywhere
+    */.local/*
+
+    # Omit everything in /usr
+    /usr/*
+
 [report]
 # Regexes for lines to exclude from consideration
 exclude_lines =
-    # omit anything in a .local directory anywhere
-    */.local/*
-
-    # omit everything in /usr
-    /usr/*
-
     # Have to re-enable the standard pragma
     pragma: no cover
 
