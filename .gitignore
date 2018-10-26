@@ -12,6 +12,7 @@ __pycache__/
 [Ll]ib64
 [Ll]ocal
 [Ss]cripts
+test-results/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
