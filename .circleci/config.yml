@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/empty_set
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
         environment:
           ENVIRONMENT: dev
       - image: circleci/mysql:5.6
