@@ -32,13 +32,7 @@ jobs:
             - ~/.cache
       - run:
           name: Run Django tests
-          command: pipenv run coverage run manage.py test -v 2
-      - run:
-          name: Generate XML test coverage report
-          command: mkdir -p test-reports/unittest && pipenv run coverage report && pipenv run coverage xml -o test-reports/test-results.xml
-      - run:
-          name: Generate HTML test coverage report
-          command: pipenv run coverage html
+          command: pipenv run py.test --cov-config .coveragerc --cov=empty_set --cov-report html --cov-report xml --junitxml=test-reports/junit.xml -n 4
       - store_test_results:
           path: test-reports
       - store_artifacts:
