@@ -31,9 +31,3 @@ exclude_lines =
 
 [html]
 directory = test-reports/html
-
-[xml]
-output = test-reports/coverage.xml
-
-[pytest]
-addopts = --cov=empty_set --junitxml=test-reports/junit.xml
