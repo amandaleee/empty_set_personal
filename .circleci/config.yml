@@ -23,12 +23,6 @@ jobs:
       - restore_cache:
           key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
-          name: Install pip
-          command: pip install --upgrade pip==18.0
-      - run:
-          name: Install pipenv
-          command: pip install pipenv==2018.10.13
-      - run:
           name: Install dev dependencies with pipenv
           command: pipenv install --dev
       - save_cache:
