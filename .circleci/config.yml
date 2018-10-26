@@ -32,7 +32,7 @@ jobs:
             - ~/.cache
       - run:
           name: Run Django tests
-          command: pipenv run py.test --cov-config .coveragerc --cov=empty_set --cov-report html --cov-report xml --junitxml=test-reports/junit.xml -n 4
+          command: pipenv run py.test --cov-config .coveragerc --cov=empty_set --cov-report html --cov-report xml --junitxml=test-reports/pytest/junit.xml -n 4
       - store_test_results:
           path: test-reports
       - store_artifacts:
