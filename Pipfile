@@ -7,7 +7,9 @@ name = "pypi"
 django = "*"
 
 [dev-packages]
-coverage = "*"
+pytest-django = "*"
+pytest-xdist = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.7"
