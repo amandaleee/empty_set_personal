@@ -33,4 +33,4 @@ exclude_lines =
 directory = test-reports/html
 
 [xml]
-output = 'test-reports/junit.xml'
+output = 'test-reports/coverage.xml'
