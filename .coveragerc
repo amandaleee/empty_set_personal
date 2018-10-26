@@ -30,7 +30,7 @@ exclude_lines =
     if __name__ == .__main__.:
 
 [html]
-directory = test-results/html
+directory = test-reports/html
 
 [xml]
-output = 'test-results/junit.xml'
+output = 'test-reports/junit.xml'

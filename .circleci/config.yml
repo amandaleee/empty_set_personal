@@ -40,10 +40,10 @@ jobs:
           name: Generate HTML test coverage report
           command: pipenv run coverage html
       - store_test_results:
-          path: test-results
+          path: test-reports
       - store_artifacts:
-          path: test-results
-          destination: test-results
+          path: test-reports
+          destination: test-reports
 
 notify:
   webhooks:
