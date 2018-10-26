@@ -21,10 +21,8 @@ exclude_lines =
     if 0:
     if __name__ == .__main__.:
 
-ignore_errors = True
-
 [html]
 directory = test-results/html
 
 [xml]
-directory = test-results/xml
+output = 'test-results/coverage.xml'
