@@ -7,7 +7,7 @@ name = "pypi"
 django = "*"
 
 [dev-packages]
-unittest-xml-reporting = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.7"
