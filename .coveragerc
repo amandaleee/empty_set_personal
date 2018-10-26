@@ -33,4 +33,4 @@ exclude_lines =
 directory = test-results/html
 
 [xml]
-output = 'test-results/coverage.xml'
+output = 'test-results/results.xml'
