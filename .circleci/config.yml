@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/empty_set
+    docker:
+      - image: circleci/python:3.6
+        environment:
+          ENVIRONMENT: dev
+      - image: circleci/mysql:5.6
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_ROOT_PASSWORD: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          name: Install pip v18.0
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip==18.0
+      - run:
+          name: Install pipenv
+          command: pip install pipenv==2018.10.13
+      - run:
+          name: Install dev dependencies with pipenv
+          command: pipenv install --dev
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "venv"
+      - run:
+          name: Run Django tests
+          command: |
+            . venv/bin/activate
+            python manage.py test
+      - store_artifacts:
+          path: test-reports/
+          destination: tr1
+
+notify:
+  webhooks:
+    - url: https://builds.app-us1.com/circle/notify
+    - url: https://builds.staging.app-us1.com/circle/notify
