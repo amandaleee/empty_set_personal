@@ -6,6 +6,12 @@ branch = True
 [report]
 # Regexes for lines to exclude from consideration
 exclude_lines =
+    # omit anything in a .local directory anywhere
+    */.local/*
+
+    # omit everything in /usr
+    /usr/*
+
     # Have to re-enable the standard pragma
     pragma: no cover
 
