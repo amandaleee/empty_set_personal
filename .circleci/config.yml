@@ -35,7 +35,7 @@ jobs:
           command: pipenv run coverage run manage.py test -v 2
       - run:
           name: Generate XML test coverage report
-          command: pipenv run coverage xml
+          command: pipenv run coverage report && pipenv run coverage xml -o test-reports/coverage.xml
       - run:
           name: Generate HTML test coverage report
           command: pipenv run coverage html
