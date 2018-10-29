@@ -12,6 +12,7 @@ pytest-xdist = "*"
 pytest-cov = "*"
 pylint = "*"
 pylint-django = "*"
+bandit = "*"
 safety = "*"
 
 [requires]

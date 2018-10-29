@@ -101,6 +101,13 @@ choices. [pylint-django](https://github.com/PyCQA/pylint-django) solves that
 problem for us by adding Django-aware syntax checker rules, avoiding false
 positives on things like declaring the constant `urlpatterns` as all lower-case.
 
+### `bandit` for security static analysis
+
+[bandit](https://github.com/PyCQA/bandit) is a Python static analysis tool built
+specifically to identify security vulnerabilities. It is no replacement for
+careful programming practices and testing, but it should hopefully narrow the
+chances of inadvertently introducing vulnerabilities in our work.
+
 ### `safety` for identifying known vulnerabilities in Python dependencies
 
 [safety](https://github.com/pyupio/safety) is a CLI tool we can use to check our
