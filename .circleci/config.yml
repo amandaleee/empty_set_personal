@@ -89,6 +89,18 @@ jobs:
           name: Run safety
           command: pipenv run safety check --full-report
 
+  security_static_analysis:
+    <<: *defaults_without_db
+
+    steps:
+      - checkout
+      - restore_cache: *restore_pipenv_install_cache
+      - run:           *install_dev_and_prod_dependencies_with_pipenv
+      - save_cache:    *save_pipenv_install_cache
+      - run:
+          name: Run Bandit
+          command: pipenv run bandit -r ./empty_set/
+
 # Run the jobs in a workflow.
 workflows:
   version: 2
@@ -97,6 +109,7 @@ workflows:
       - build_and_test
       - check_dependencies_for_known_security_vulnerabilities
       - lint
+      - security_static_analysis
 
 # Notify the builds service after a successful build.
 notify:
