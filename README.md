@@ -15,6 +15,23 @@ linting and static analysis of Python code.
 `empty_set` makes some opinionated decisions about the tools we should use to
 ensure code quality through the continuous integration workflow.
 
+### `pipenv` for managing Python virtual environments and dependencies
+
+Without good tooling, it is easy to make a mess of Python dependencies. [pipenv](https://pipenv.readthedocs.io/en/latest/)
+is the solution to managing Python dependencies, and for cleanly interacting
+with your projects' `virtualenv`s.
+
+It is reaonsable to think of `pipenv` as Python's `composer`, `npm`, etc.
+
+#### Notes
+
+For further reading about Python dependency and `virtualenv` management, see the
+following links. A little reading should be convincing that using `pipenv` is
+the simplest solution for this problem.
+- [https://docs.python-guide.org/dev/virtualenvs/]
+- [https://virtualenv.pypa.io/en/latest/]
+
+
 ### `pytest` for testing
 
 `empty_set` uses [pytest](https://docs.pytest.org/en/latest/) for its testing
