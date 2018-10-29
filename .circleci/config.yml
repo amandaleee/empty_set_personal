@@ -71,11 +71,24 @@ jobs:
           name: Run Pylint
           command: pipenv run pylint --load-plugins pylint_django ./empty_set
 
+  check_dependencies_for_known_security_vulnerabilities:
+    <<: *defaults_without_db
+
+    steps:
+      - checkout
+      - restore_cache: *restore_pipenv_install_cache
+      - run:           *install_dev_and_prod_dependencies_with_pipenv
+      - save_cache:    *save_pipenv_install_cache
+      - run:
+          name: Run safety
+          command: pipenv run safety check --full-report
+
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build_and_test
+      - check_dependencies_for_known_security_vulnerabilities
       - lint
 
 notify:

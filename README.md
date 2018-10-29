@@ -100,3 +100,10 @@ for style and not get false positives back just because of our framework's
 choices. [pylint-django](https://github.com/PyCQA/pylint-django) solves that
 problem for us by adding Django-aware syntax checker rules, avoiding false
 positives on things like declaring the constant `urlpatterns` as all lower-case.
+
+### `safety` for identifying known vulnerabilities in Python dependencies
+
+[safety](https://github.com/pyupio/safety) is a CLI tool we can use to check our
+installed Python dependencies for any known vulnerabilities. The free version
+runs its checks against a default public database of vulnerabilities. If we want
+to get notified even sooner we can explore the paid version.

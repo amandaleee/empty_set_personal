@@ -12,6 +12,7 @@ pytest-xdist = "*"
 pytest-cov = "*"
 pylint = "*"
 pylint-django = "*"
+safety = "*"
 
 [requires]
 python_version = "3.7"
