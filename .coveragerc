@@ -1,5 +1,6 @@
-# .coveragerc to control coverage.ph
-# https://coverage.readthedocs.io/en/v4.5.x/config.html
+# .coveragerc to control coverage.py
+#
+# See: https://coverage.readthedocs.io/en/v4.5.x/config.html
 [run]
 branch = True
 
@@ -30,4 +31,5 @@ exclude_lines =
     if __name__ == .__main__.:
 
 [html]
+# Specify the output directory of any HTML test coverage reports
 directory = test-reports/html
