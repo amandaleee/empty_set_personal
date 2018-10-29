@@ -1,35 +1,62 @@
+defaults_with_db: &defaults_with_db
+  working_directory: ~/empty_set
+
+  docker:
+    - image: circleci/python:3.7
+      environment:
+        ENVIRONMENT: dev
+
+    - image: circleci/mysql:5.6-ram # See https://github.com/CircleCI-Public/circleci-dockerfiles/blob/master/mysql/images/5.6.42/ram/Dockerfile
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_HOST: 127.0.0.1
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_ROOT_PASSWORD: ubuntu
+
+defaults_without_db: &defaults_without_db
+  working_directory: ~/empty_set
+
+  docker:
+    - image: circleci/python:3.7
+      environment:
+        ENVIRONMENT: dev
+
+    - image: circleci/mysql:5.6-ram # See https://github.com/CircleCI-Public/circleci-dockerfiles/blob/master/mysql/images/5.6.42/ram/Dockerfile
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+        MYSQL_HOST: 127.0.0.1
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_ROOT_PASSWORD: ubuntu
+
+default_test_steps:
+  - run: &wait_for_db
+      name: Wait for db
+      command: dockerize -wait tcp://localhost:3306 -timeout 1m 
+
+  - restore_cache: &restore_pipenv_install_cache
+      key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+
+  - run: &install_dev_and_prod_dependencies_with_pipenv
+      name: Install dev dependencies with pipenv
+      command: pipenv install --dev
+
+  - save_cache: &save_pipenv_install_cache
+      key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      paths:
+        - ~/.local
+        - ~/.cache
+
 version: 2
 jobs:
-  build:
-    working_directory: ~/empty_set
-
-    docker:
-      - image: circleci/python:3.7
-        environment:
-          ENVIRONMENT: dev
-
-      - image: circleci/mysql:5.6
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_ROOT_HOST: "%"
-          MYSQL_ROOT_PASSWORD: ubuntu
+  build_and_test:
+    <<: *defaults_with_db
 
     steps:
       - checkout
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
-      - restore_cache:
-          key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-      - run:
-          name: Install dev dependencies with pipenv
-          command: pipenv install --dev
-      - save_cache:
-          key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ~/.local
-            - ~/.cache
+      - run:           *wait_for_db
+      - restore_cache: *restore_pipenv_install_cache
+      - run:           *install_dev_and_prod_dependencies_with_pipenv
+      - save_cache:    *save_pipenv_install_cache
       - run:
           name: Run Django tests
           command: pipenv run py.test
@@ -38,6 +65,25 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
+        
+  lint:
+    <<: *defaults_without_db
+
+    steps:
+      - checkout
+      - restore_cache: *restore_pipenv_install_cache
+      - run:           *install_dev_and_prod_dependencies_with_pipenv
+      - save_cache:    *save_pipenv_install_cache
+      - run:
+          name: Run Pylint
+          command: pipenv run pylint --load-plugins pylint_django ./empty_set
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build_and_test
+      - lint
 
 notify:
   webhooks:

@@ -1,3 +1,6 @@
+"""
+A suite of very pedantic tests to run in CircleCI as a demo.
+"""
 from django.test import TestCase
 
 from empty_set import urls

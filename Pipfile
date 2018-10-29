@@ -10,6 +10,8 @@ django = "*"
 pytest-django = "*"
 pytest-xdist = "*"
 pytest-cov = "*"
+pylint = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.7"

@@ -84,3 +84,19 @@ for some time.
 See [pytest.ini](pytest.ini) for information about how parallel test runs are
 configured.
 
+### `pylint` for linting Python code
+
+[pylint](https://pylint.readthedocs.io/en/latest/) is a multi-purpose code
+checking tool. It seeks to identify code smells and syntax errors, and also
+enforces common coding standards. We can use it to catch obvious mistakes early,
+and to make sure our Python code is consistent in terms of style. No more dumb
+bikeshedding!
+
+### `pylint-django` code checkers for `pylint`
+
+By itself, `pylint` will identify issues with code that are a normal part of
+working with the Django framework. However, we should be able to lint our code
+for style and not get false positives back just because of our framework's
+choices. [pylint-django](https://github.com/PyCQA/pylint-django) solves that
+problem for us by adding Django-aware syntax checker rules, avoiding false
+positives on things like declaring the constant `urlpatterns` as all lower-case.
