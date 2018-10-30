@@ -6,6 +6,10 @@ defaults_with_db: &defaults_with_db
   docker:
     - image: circleci/python:3.7
       environment:
+        DB_HOST: 127.0.0.1
+        DB_NAME: empty_set
+        DB_PASSWORD: password
+        DB_USER: root
         ENVIRONMENT: dev
 
     - image: circleci/mysql:5.6-ram # See https://github.com/CircleCI-Public/circleci-dockerfiles/blob/master/mysql/images/5.6.42/ram/Dockerfile
@@ -13,7 +17,7 @@ defaults_with_db: &defaults_with_db
         MYSQL_ALLOW_EMPTY_PASSWORD: true
         MYSQL_HOST: 127.0.0.1
         MYSQL_ROOT_HOST: "%"
-        MYSQL_ROOT_PASSWORD: ubuntu
+        MYSQL_ROOT_PASSWORD: password
 
 # Use these builds if your job does NOT require a database. Will speed up your
 # build. Yay!
