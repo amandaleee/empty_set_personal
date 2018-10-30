@@ -1,7 +1,9 @@
 # .coveragerc to control coverage.py
 #
 # See: https://coverage.readthedocs.io/en/v4.5.x/config.html
+# See: https://github.com/codecov/example-python
 [run]
+source = empty_set
 branch = True
 
 # Omit things like external dependencies from coverage reports
@@ -29,6 +31,9 @@ exclude_lines =
     # Don't complain if non-runnable code isn't run:
     if 0:
     if __name__ == .__main__.:
+
+[xml]
+output = test-reports/coverage.xml
 
 [html]
 # Specify the output directory of any HTML test coverage reports
