@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
+mysqlclient = "*"
+gunicorn = "*"
 
 [dev-packages]
 pytest-django = "*"

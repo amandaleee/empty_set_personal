@@ -5,6 +5,12 @@
 .pytest_cache
 test-reports/
 
+# Static files
+empty_set/media/*
+!empty_set/media/.gitkeep
+empty_set/static/*
+!empty_set/static/.gitkeep
+
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 .Python
