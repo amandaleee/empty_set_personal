@@ -61,6 +61,14 @@ In addition, CircleCI offers support for uploading build artifacts like
 [browsable HTML coverage reports](http://screen.ac/a339e01a35d7), which offer a
 more human-readable coverage report for fine-grained line-by-line analysis.
 
+### `codecov` for test coverage analysis and GitHub feedback
+
+[codecov](https://codecov.io) is a UI for code coverage analysis. It also offers
+a rich GitHub integration, that will provide feedback in the form of PR comments
+as CircleCI finishes running tests and uploads the `test-reports/coverage.xml`
+coverage report to `codecov`. PRs should automatically be commented upon for
+instant feedback about whether a PR increased or decreased coverage, etc.
+
 #### Notes
 
 See the following files for information about how test coverage reporting is
