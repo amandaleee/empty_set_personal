@@ -2,7 +2,7 @@
 
 `empty_set` is a bucket of opinionated CI config.
 
-[![CircleCI](https://circleci.com/gh/ActiveCampaign/empty_set.svg?style=svg&circle-token=0eaea411be5fca3fe2868b4e24257b8da043ad3b)](https://circleci.com/gh/ActiveCampaign/empty_set)
+[![CircleCI](https://circleci.com/gh/ActiveCampaign/empty_set.svg?style=svg&circle-token=0eaea411be5fca3fe2868b4e24257b8da043ad3b)](https://circleci.com/gh/ActiveCampaign/empty_set) [![codecov](https://codecov.io/gh/ActiveCampaign/empty_set/branch/master/graph/badge.svg?token=fydRcPWnv2)](https://codecov.io/gh/ActiveCampaign/empty_set)
 
 `empty_set` is an empty Python [Django](https://www.djangoproject.com/) app with
 a pre-configured [CircleCI](https://circleci.com) configuration file. This repo
@@ -61,6 +61,13 @@ In addition, CircleCI offers support for uploading build artifacts like
 [browsable HTML coverage reports](http://screen.ac/a339e01a35d7), which offer a
 more human-readable coverage report for fine-grained line-by-line analysis.
 
+#### Notes
+
+See the following files for information about how test coverage reporting is
+configured for `empty_set`:
+- [.coveragerc](.coveragerc): Configures what files and folders to test, and the filepath to write HTML coverage reports to
+- [pytest.ini](pytest.ini): Configures the default CLI args for `pytest`, and helps `pytest` understand the Django app's configuration
+
 ### `codecov` for test coverage analysis and GitHub feedback
 
 [codecov](https://codecov.io) is a UI for code coverage analysis. It also offers
@@ -71,10 +78,15 @@ instant feedback about whether a PR increased or decreased coverage, etc.
 
 #### Notes
 
-See the following files for information about how test coverage reporting is
-configured for `empty_set`:
-- [.coveragerc](.coveragerc): Configures what files and folders to test, and the filepath to write HTML coverage reports to
-- [pytest.ini](pytest.ini): Configures the default CLI args for `pytest`, and helps `pytest` understand the Django app's configuration
+`codecov` will need an auth token for your repository added to your environment/
+CircleCI configuration. In CircleCI, the best place to do this is in the
+project's settings, under **Environment Variables**.
+
+You can find the `codecov` token for your repository in `codecov`'s settings
+page, under the section **Repository Upload Token**.
+
+See: [https://github.com/codecov/example-python]
+See: [https://codecov.io/gh/ActiveCampaign/empty_set/settings]
 
 ### `pytest-xdist` for parallelization of running the test suite
 
