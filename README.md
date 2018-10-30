@@ -145,6 +145,10 @@ docker-compose exec python pipenv run python manage.py migrate
 docker-compose exec python pipenv run python manage.py collectstatic
 ```
 
+Your application should now be available at http://localhost.
+
+**If you are a docker-machine user**, your app is probably available at http://192.68.99.100.
+
 #### Notes
 
 If you are a docker-machine user, you may need to create a new and separate NFS
