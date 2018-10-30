@@ -64,6 +64,9 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
+      - run:
+          name: Upload code coverage reports
+          command: pipenv run codecov --file test-reports/coverage.xml
         
   lint:
     <<: *defaults_without_db
