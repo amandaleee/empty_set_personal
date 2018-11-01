@@ -134,3 +134,42 @@ chances of inadvertently introducing vulnerabilities in our work.
 installed Python dependencies for any known vulnerabilities. The free version
 runs its checks against a default public database of vulnerabilities. If we want
 to get notified even sooner we can explore the paid version.
+
+## Docker for local development
+
+### Creating the local Docker environment
+
+Bring up the docker-compose services:
+
+```bash
+docker-compose up
+```
+
+(Optional) run the database migrations:
+
+```bash
+docker-compose exec python pipenv run python manage.py migrate
+```
+
+(Optional) generate any required static files for your application:
+
+```bash
+docker-compose exec python pipenv run python manage.py collectstatic
+```
+
+Your application should now be available at http://localhost.
+
+**If you are a docker-machine user**, your app is probably available at http://192.68.99.100.
+
+#### Notes
+
+If you are a docker-machine user, you may need to create a new and separate NFS
+mount for the root of this project. Run this command:
+
+```bash
+docker-machine-nfs default -f --shared-folder=$(pwd) --mount-opts="async,noatime,actimeo=1,nolock,vers=3,udp"
+```
+
+⚠⚠⚠ **IMPORTANT:** ⚠⚠⚠ To get `localdev` working again, you will need to re-run the
+command above to create a docker-machine NFS mount for localdev. Refer to the
+`localdev` README.md for instructions. You should see a similar command [in that README.md.](https://github.com/ActiveCampaign/localdev/blob/d2a4c3178d2f0a2ee4c5e992bea9c474eab22a08/README.md#instructions)
