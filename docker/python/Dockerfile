@@ -22,4 +22,4 @@ RUN pipenv install
 
 STOPSIGNAL SIGINT
 
-CMD ["pipenv", "run", "gunicorn", "--chdir", "empty_set", "--bind", ":8000", "empty_set.wsgi:application"]
+CMD ["pipenv", "run", "gunicorn", "--chdir", "empty_set", "--reload", "--bind", ":8000", "empty_set.wsgi:application"]
