@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '192.168.99.100', # For folks using docker-machine locally
+    'localhost', 
 ]
 
 
